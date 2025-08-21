@@ -1,0 +1,66 @@
+services:
+  products-db:
+    image: mysql:8.0
+    container_name: products-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: products_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: products
+      MYSQL_PASSWORD: products
+    ports:
+      - "33061:3306"
+    networks:
+      - Technic-Test-Network
+    volumes:
+      - products-db-data:/var/lib/mysql
+
+  products:
+    build:
+      context: ./products
+    container_name: products-service
+    ports:
+      - "9001:80"
+    volumes:
+      - ./products:/var/www/html
+    networks:
+      - Technic-Test-Network
+    depends_on:
+      - products-db
+
+  inventory-db:
+    image: mysql:8.0
+    container_name: inventory-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: inventory_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: inventory
+      MYSQL_PASSWORD: inventory
+    ports:
+      - "33062:3306"
+    networks:
+      - Technic-Test-Network
+    volumes:
+      - inventory-db-data:/var/lib/mysql
+
+  inventory:
+    build:
+      context: ./inventory
+    container_name: inventory-service
+    ports:
+      - "9000:80"
+    volumes:
+      - ./inventory:/var/www/html
+    networks:
+      - Technic-Test-Network
+    depends_on:
+      - inventory-db
+
+networks:
+  Technic-Test-Network:
+    driver: bridge
+
+volumes:
+  products-db-data:
+  inventory-db-data:
