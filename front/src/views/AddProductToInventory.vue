@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { addProductToInventory } from '@/services/InventoryService'
+
+
+const router = useRouter()
 
 const productId = ref<number>(0)
 const quantity = ref<number>(0)
@@ -9,6 +13,7 @@ const handleSubmit = async () => {
   try {
     await addProductToInventory(productId.value, quantity.value)
     alert('Producto agregado exitosamente al inventario.')
+    await router.push('/inventory')
   } catch (error: any) {
     alert(error.response?.data?.message || 'Error al agregar el producto.')
     console.error(error)

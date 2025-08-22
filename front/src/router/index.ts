@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: '/shop',
       name: 'shop',
-      component: () => import('../views/InventoryPage.vue'),
+      component: () => import('../views/SimulateItemShop.vue'),
     },
   ],
 })

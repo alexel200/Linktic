@@ -16,3 +16,9 @@ export const addProductToInventory = (productId: number, quantity: number) => {
     quantity: quantity
   });
 };
+export default {
+  async decreaseStock(product_id, quantity) {
+    const url = `/inventory/${product_id}/decrease-stock`
+    return api.patch(url, { quantity })
+  }
+}
