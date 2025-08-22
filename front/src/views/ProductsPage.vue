@@ -29,7 +29,7 @@ const fetchProducts = async (page: number = 1) => {
 const showProductDetails = async (id: number) => {
   try {
     const response = await getProductById(id)
-    selectedProduct.value = JSON.parse(response.data)
+    selectedProduct.value = JSON.parse(response.data.data)
     showPopup.value = true
   } catch (error) {
     console.error('Error al obtener detalle del producto:', error)
