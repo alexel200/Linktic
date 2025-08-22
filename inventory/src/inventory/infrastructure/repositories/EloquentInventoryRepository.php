@@ -15,7 +15,7 @@ class EloquentInventoryRepository implements InventoryRepositoryInterface
     {
         return EloquentInventory::all()->map(function (EloquentInventory $inventory) {
             return InventoryMapper::fromEloquent($inventory);
-        });
+        })->toArray();
     }
 
     public function getInventoryById(int $product_id): ?Inventory
