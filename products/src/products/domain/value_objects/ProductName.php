@@ -2,6 +2,8 @@
 
 namespace Src\products\domain\value_objects;
 
+use Src\products\domain\exceptions\BadRequestException;
+
 final class ProductName
 {
     private string $name;
@@ -9,7 +11,7 @@ final class ProductName
     {
         if(empty($name) || strlen($name) < 3)
         {
-            throw new \InvalidArgumentException("El nombre del producto no puede contener al menos 3 caracteres");
+            throw new BadRequestException("El nombre del producto debe contener al menos 3 caracteres");
         }
         $this->name = $name;
     }

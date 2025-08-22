@@ -245,6 +245,16 @@
       <path value="$PROJECT_DIR$/inventory/vendor/graham-campbell/result-type" />
       <path value="$PROJECT_DIR$/products/vendor/laravel/sanctum" />
       <path value="$PROJECT_DIR$/inventory/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/products/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/products/vendor/darkaonline/l5-swagger" />
+      <path value="$PROJECT_DIR$/products/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/products/vendor/swagger-api/swagger-ui" />
+      <path value="$PROJECT_DIR$/products/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/inventory/vendor/darkaonline/l5-swagger" />
+      <path value="$PROJECT_DIR$/inventory/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/inventory/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/inventory/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/inventory/vendor/swagger-api/swagger-ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

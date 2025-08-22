@@ -17,7 +17,9 @@
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/darkaonline/l5-swagger" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/dflydev/dot-access-data" />
+      <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/dragonmantank/cron-expression" />
@@ -64,6 +66,7 @@
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/phpunit/php-text-template" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/phpunit/php-timer" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/psr/clock" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/psr/event-dispatcher" />
@@ -92,6 +95,7 @@
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/sebastian/version" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/staabm/side-effects-detector" />
+      <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/swagger-api/swagger-ui" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/symfony/clock" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/symfony/css-selector" />
@@ -128,10 +132,13 @@
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/inventory/vendor/zircote/swagger-php" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/products/vendor/darkaonline/l5-swagger" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/dflydev/dot-access-data" />
+      <excludeFolder url="file://$MODULE_DIR$/products/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/dragonmantank/cron-expression" />
@@ -178,6 +185,7 @@
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/phpunit/php-text-template" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/phpunit/php-timer" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/products/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/psr/clock" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/psr/event-dispatcher" />
@@ -206,6 +214,7 @@
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/sebastian/version" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/staabm/side-effects-detector" />
+      <excludeFolder url="file://$MODULE_DIR$/products/vendor/swagger-api/swagger-ui" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/symfony/clock" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/symfony/css-selector" />
@@ -242,6 +251,7 @@
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/products/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/products/vendor/zircote/swagger-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

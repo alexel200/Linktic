@@ -1,14 +1,14 @@
 <?php
 
-namespace Src\products\infrastructure\Controllers;
+namespace Src\inventory\infrastructure\controllers;
 
 /**
  * @OA\Info(
  * version="1.0.0",
- * title="Products API",
- * description="API documentation for the products microservice.",
+ * title="Inventory API",
+ * description="API documentation for the Inventory microservice.",
  * @OA\Contact(
- * email="support@example.com"
+ * email="alexel200@gmail.com"
  * ),
  * @OA\License(
  * name="Apache 2.0",
