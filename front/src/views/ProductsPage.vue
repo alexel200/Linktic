@@ -5,20 +5,22 @@ import ProductCard from '@/components/products/ProductCard.vue'
 import ProductPopup from '@/components/products/ProductPopup.vue'
 
 import shopImage from '@/assets/shop.png'
-
 import type { Product } from '@/interfaces/Product'
 
 const products = ref<Product[]>([])
 const currentPage = ref(1)
-const itemsPerPage = 10
+const itemsPerPage = 12
+const totalPages = ref(1)
 
 const selectedProduct = ref<Product | null>(null)
 const showPopup = ref(false)
 
-const fetchProducts = async () => {
+const fetchProducts = async (page: number = 1) => {
   try {
-    const response = await getProducts()
-    products.value = response.data
+    const response = await getProducts(page, itemsPerPage)
+    products.value = response.data.data
+    currentPage.value = response.data.current_page
+    totalPages.value = response.data.last_page
   } catch (error) {
     console.error('Error al obtener productos:', error)
   }
@@ -28,7 +30,6 @@ const showProductDetails = async (id: number) => {
   try {
     const response = await getProductById(id)
     selectedProduct.value = JSON.parse(response.data)
-    console.log(selectedProduct)
     showPopup.value = true
   } catch (error) {
     console.error('Error al obtener detalle del producto:', error)
@@ -40,30 +41,22 @@ const cerrarPopup = () => {
   selectedProduct.value = null
 }
 
-onMounted(fetchProducts)
-
-const paginatedProductos = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage
-  return products.value.slice(start, start + itemsPerPage)
-})
-
-const totalPages = computed(() =>
-  Math.ceil(products.value.length / itemsPerPage)
-)
-
 const goToPage = (page: number) => {
   if (page >= 1 && page <= totalPages.value) {
-    currentPage.value = page
+    fetchProducts(page)
   }
 }
 
+onMounted(() => fetchProducts())
 </script>
+
 
 <template>
   <div class="products-container">
+    <!-- Grid de productos -->
     <div class="products-grid">
       <ProductCard
-        v-for="product in paginatedProductos"
+        v-for="product in products"
         :key="product.id"
         v-bind="product"
         @show-details="showProductDetails"
@@ -72,9 +65,13 @@ const goToPage = (page: number) => {
 
     <!-- Paginación -->
     <div class="pagination">
-      <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">Anterior</button>
+      <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">
+        Anterior
+      </button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">Siguiente</button>
+      <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">
+        Siguiente
+      </button>
     </div>
 
     <!-- Popup de detalle -->
@@ -86,6 +83,7 @@ const goToPage = (page: number) => {
     />
   </div>
 </template>
+
 
 
 <style scoped>
@@ -120,26 +118,6 @@ const goToPage = (page: number) => {
 .pagination button:disabled {
   background-color: gray;
   cursor: not-allowed;
-}
-
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 580px;
 }
 
 </style>

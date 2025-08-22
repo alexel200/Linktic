@@ -2,6 +2,7 @@
 
 namespace Src\inventory\infrastructure\controllers;
 
+
 use Illuminate\Http\JsonResponse;
 use Src\inventory\application\ListInventoryUseCase;
 use Src\inventory\domain\exceptions\DomainException;
@@ -16,7 +17,13 @@ class ListInventoryGetController
             $list_inventory = $list_products->execute();
             return JsonApiResponse::success($list_inventory);
         }catch(DomainException|\Exception $exception){
-            return JsonApiResponse::error($exception->getMessage(), $exception->getCode());
+
+            $httpCode = $exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException
+                ? $exception->getStatusCode()
+                : 500;
+
+
+            return JsonApiResponse::error($exception->getMessage(), $httpCode);
         }
 
     }

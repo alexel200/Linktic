@@ -4,6 +4,7 @@ namespace Src\products\application;
 
 use Src\products\domain\contracts\ProductRepositoryInterface;
 use Src\products\domain\entity\Product;
+use Src\products\domain\exceptions\ProductNotFoundException;
 use Src\products\domain\value_objects\ProductName;
 use Src\products\domain\value_objects\ProductPrice;
 use Src\products\domain\value_objects\ProductStock;
@@ -15,7 +16,7 @@ class UpdateProductUseCase
 
     }
 
-    public function execute(int $product_id, array $new_product){
+    public function execute(int $product_id, array $new_product): Product{
         $old_product = $this->product_repository->getProductById($product_id);
 
         if($old_product){
@@ -26,9 +27,10 @@ class UpdateProductUseCase
 
             $new_product = new Product($product_name, $description, $product_price, $product_stock, $old_product->getId());
             $this->product_repository->updateProduct($new_product);
+            return $new_product;
         }
 
-        //TODO: throw error, product doesnt exist
+        throw new ProductNotFoundException();
     }
 
 }

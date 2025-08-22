@@ -35,7 +35,7 @@ class ProductsClient
                 ->get("{$this->baseUrl}/api/products");
 
             if ($response->successful()) {
-                $result = $response->json();
+                $result = $response->json()['data'] ?? [];
 
                 return array_map(function ($product) {
                     return new ProductDto($product);

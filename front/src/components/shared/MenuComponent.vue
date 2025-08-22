@@ -1,16 +1,30 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
   <ul class="menu">
-    <li><router-link to="/">Productos</router-link></li>
-    <li><router-link to="/inventory">Inventario</router-link></li>
-    <li><router-link to="/shop">Simular compra</router-link></li>
+    <li>
+      <router-link to="/" exact-active-class="active-link">Productos</router-link>
+    </li>
+    <li>
+      <router-link to="/inventory" exact-active-class="active-link">Inventario</router-link>
+    </li>
+    <li>
+      <router-link to="/add-to-inventory" exact-active-class="active-link">Ingresar Producto al inventario</router-link>
+    </li>
+    <li>
+      <router-link to="/shop" exact-active-class="active-link">Simular compra</router-link>
+    </li>
   </ul>
 </template>
 
 <style scoped>
+.active-link {
+  color: dodgerblue;
+  font-weight: bold;
+  border-bottom: 2px solid dodgerblue;
+}
+
 .menu {
   list-style: none;
   display: flex;
@@ -20,13 +34,16 @@
 }
 
 .menu li {
-  color: white;
-  cursor: pointer;
   font-weight: bold;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.menu li:hover {
-  color: lightblue;
+.menu li a:hover {
+  color: dodgerblue;
 }
 </style>

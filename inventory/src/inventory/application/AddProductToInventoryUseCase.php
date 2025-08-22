@@ -34,7 +34,10 @@ readonly class AddProductToInventoryUseCase
 
             return JsonApiResponse::success([]);
         }catch(DomainException|\Exception $exception){
-            return JsonApiResponse::error($exception->getMessage(), $exception->getCode() ?? 500);
+            $httpCode = $exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException
+                ? $exception->getStatusCode()
+                : 500;
+            return JsonApiResponse::error($exception->getMessage(), $httpCode);
         }
     }
 

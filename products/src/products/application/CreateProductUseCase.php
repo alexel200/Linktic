@@ -2,9 +2,10 @@
 
 namespace Src\products\application;
 
-use Illuminate\Support\Facades\Log;
+use Illuminate\Database\QueryException;
 use Src\products\domain\contracts\ProductRepositoryInterface;
 use Src\products\domain\entity\Product;
+use Src\products\domain\exceptions\ProductAlreadyExistsException;
 use Src\products\domain\value_objects\ProductName;
 use Src\products\domain\value_objects\ProductPrice;
 use Src\products\domain\value_objects\ProductStock;
@@ -24,8 +25,12 @@ readonly class CreateProductUseCase
 
         try{
             $this->product_repository->createProduct($product);
+        }catch(QueryException $e){
+            if($e->getCode() == 23000){
+                throw new ProductAlreadyExistsException("El producto ya existe, por favor intente actualizarlo en lugar de crearlo.");
+            }
         }catch(\Exception $e){
-            Log::error($e->getMessage());
+            throw new \Exception($e->getMessage(), 500);
         }
     }
 }

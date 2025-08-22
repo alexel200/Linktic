@@ -4,6 +4,8 @@ namespace Src\products\infrastructure;
 
 
 use Illuminate\Http\Request;
+use Src\products\domain\exceptions\BadRequestException;
+
 
 class Validator
 {
@@ -33,7 +35,7 @@ class Validator
         }
 
         if(count($this->missing_fields) > 0){
-            throw new \InvalidArgumentException("Missing fields: " . implode(', ', $this->missing_fields));
+            throw new BadRequestException("Missing fields: " . implode(', ', $this->missing_fields));
         }
     }
 
@@ -52,19 +54,19 @@ class Validator
 
     private function checkFieldType(string $field, mixed $value, array $validator_row):void{
         if(gettype($value) !== $validator_row['type'] && !str_contains(gettype($value), $validator_row['type'])){
-            throw new \InvalidArgumentException( sprintf("Field \"%s\" contains wrong value, the expected value should be %s", $field, $validator_row['type']));
+            throw new BadRequestException( sprintf("Field \"%s\" contains wrong value, the expected value should be %s", $field, $validator_row['type']));
         }
     }
 
     private function checkMinimumLength(string $field, mixed $value, array $validator_row):void{
         if($validator_row['type'] === 'string' && isset($validator_row['min_length']) && strlen($value) < $validator_row['min_length']){
-            throw new \InvalidArgumentException( sprintf("Field \"%s\" must content at least %d characters", $field, $validator_row['min_length']));
+            throw new BadRequestException( sprintf("Field \"%s\" must content at least %d characters", $field, $validator_row['min_length']));
         }
     }
 
     private function checkMinimumValue(string $field, mixed $value, array $validator_row):void{
         if($validator_row['type'] === 'int' && isset($validator_row['min_value']) && $value < $validator_row['min_value']){
-            throw new \InvalidArgumentException( sprintf("Field \"%s\" must content at least %d characters", $field, $validator_row['min_value']));
+            throw new BadRequestException( sprintf("Field \"%s\" must content at least %d characters", $field, $validator_row['min_value']));
         }
     }
 
@@ -73,12 +75,12 @@ class Validator
             $pattern = '/\d{4}-\d{2}-\d{2}$/';
 
             if (!preg_match($pattern, $value)) {
-                throw new \InvalidArgumentException(sprintf("The field \"%s\" does not contain a valid format yyyy-mm-dd", $field));
+                throw new BadRequestException(sprintf("The field \"%s\" does not contain a valid format yyyy-mm-dd", $field));
             }
 
             [$year, $month, $day] = explode('-', $value);
             if(!checkdate((int) $month, (int) $day, (int) $year)){
-                throw new \InvalidArgumentException(sprintf("The field \"%s\" is not a valid date format", $field));
+                throw new BadRequestException(sprintf("The field \"%s\" is not a valid date format", $field));
             }
         }
     }

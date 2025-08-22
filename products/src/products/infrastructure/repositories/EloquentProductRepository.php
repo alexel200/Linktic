@@ -2,10 +2,10 @@
 
 namespace Src\products\infrastructure\repositories;
 
-use Illuminate\Support\Facades\Log;
+use App\Models\Product as EloquentProduct;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Src\products\domain\contracts\ProductRepositoryInterface;
 use Src\products\domain\entity\Product;
-use App\Models\Product as EloquentProduct;
 use Src\products\infrastructure\mappers\ProductMapper;
 
 class EloquentProductRepository implements ProductRepositoryInterface
@@ -13,7 +13,6 @@ class EloquentProductRepository implements ProductRepositoryInterface
 
     public function createProduct(Product $product): void
     {
-        Log::info("Este es el producto". json_encode($product->getName()->value()));
         EloquentProduct::create(["name" => $product->getName()->value(), "description" => $product->getDescription(), "price" => $product->getPrice()->value(), "stock" => $product->getStock()->value()]);
     }
 
@@ -24,6 +23,24 @@ class EloquentProductRepository implements ProductRepositoryInterface
                return ProductMapper::fromEloquent($eloquentProduct);
             })->toArray();
     }
+
+    public function getPaginatedProducts(int $page, int $perPage): LengthAwarePaginator
+    {
+        $paginator = EloquentProduct::query()->paginate($perPage, ['*'], 'page', $page);
+
+        $mappedItems = $paginator->getCollection()->map(function (EloquentProduct $eloquentProduct) {
+            return ProductMapper::fromEloquent($eloquentProduct)->jsonSerialize();
+        });
+
+        return new LengthAwarePaginator(
+            $mappedItems,
+            $paginator->total(),
+            $paginator->perPage(),
+            $paginator->currentPage(),
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+    }
+
 
     public function getProductById(int $id): ?Product
     {
@@ -44,7 +61,7 @@ class EloquentProductRepository implements ProductRepositoryInterface
     {
         $deleted = EloquentProduct::destroy($id);
         if ($deleted === 0) {
-            //TODO: Response
+            throw new \Exception("Ocurrio un error al eliminar el producto.", 500);
         }
     }
 }

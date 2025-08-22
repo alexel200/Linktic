@@ -16,8 +16,10 @@ class ListInventoryUseCase
     public function execute(): array{
 
         $inventory = $this->repository->getInventory();
+
         $product_client = new ProductsClient();
-        $productDtos = $product_client->getProducts(); // ya son ProductDto
+
+        $productDtos = $product_client->getProducts();
 
         $indexedProducts = [];
         foreach ($productDtos as $productDto) {

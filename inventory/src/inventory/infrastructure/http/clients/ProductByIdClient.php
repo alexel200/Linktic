@@ -5,13 +5,11 @@ namespace Src\inventory\infrastructure\http\clients;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use SebastianBergmann\Invoker\TimeoutException;
-
 use Src\inventory\application\Dtos\ProductDto;
+use Src\inventory\domain\exceptions\ConnectionException as DomainConnectionException;
 use Src\inventory\domain\exceptions\RequestException as DomainRequestException;
-use \Src\inventory\domain\exceptions\TimeoutException as DomainTimeoutException;
-use \Src\inventory\domain\exceptions\ConnectionException as DomainConnectionException;
+use Src\inventory\domain\exceptions\TimeoutException as DomainTimeoutException;
 
 class ProductByIdClient
 {
@@ -35,7 +33,7 @@ class ProductByIdClient
                 ->get("{$this->baseUrl}/api/products/{$id}");
 
             if ($response->successful()) {
-                return new ProductDto(json_decode($response->json(), true));
+                return new ProductDto(json_decode($response->json()['data'], true));
             }
         }catch(ConnectionException $e){
             throw new DomainConnectionException($e->getMessage(), $e->getCode());

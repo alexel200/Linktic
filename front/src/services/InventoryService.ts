@@ -9,3 +9,10 @@ const api = axios.create({
 
 export const getInventory = () => api.get('/inventory');
 
+
+export const addProductToInventory = (productId: number, quantity: number) => {
+  return api.post('/inventory/add-product', {
+    product_id: productId,
+    quantity: quantity
+  });
+};

@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/InventoryPage.vue'),
     },
     {
+      path: '/add-to-inventory',
+      name: 'add-to-inventory',
+      component: () => import('../views/AddProductToInventory.vue'),
+    },
+    {
       path: '/shop',
       name: 'shop',
       component: () => import('../views/InventoryPage.vue'),

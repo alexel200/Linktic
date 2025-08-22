@@ -8,7 +8,7 @@ final class CreateProductRequestValidator
         return [ "id" => ['required' => false, 'type' => 'int'],
             "name" => ["required" => true, "type" => "string", "min_length" => 3],
             "description" => ["required" => false, "type" => "string"],
-            "price" => ["required" => true, "type" => "float", "min_value" => 0],
+            "price" => ["required" => true, "type" => "double", "min_value" => 0],
             "stock" => ["required" => true, "type" => "int", "min_value" => 0],
         ];
     }
