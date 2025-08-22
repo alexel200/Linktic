@@ -69,6 +69,23 @@ services:
       inventory-db:
         condition: service_healthy
 
+  frontend:
+    container_name: frontend
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - inventory
+      - products
+
+
 networks:
   Technic-Test-Network:
     driver: bridge
