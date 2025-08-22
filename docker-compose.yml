@@ -14,6 +14,11 @@ services:
       - Technic-Test-Network
     volumes:
       - products-db-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uproducts", "-pproducts" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   products:
     build:
@@ -26,7 +31,8 @@ services:
     networks:
       - Technic-Test-Network
     depends_on:
-      - products-db
+      products-db:
+        condition: service_healthy
 
   inventory-db:
     image: mysql:8.0
@@ -43,6 +49,11 @@ services:
       - Technic-Test-Network
     volumes:
       - inventory-db-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uinventory", "-pinventory" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   inventory:
     build:
@@ -55,7 +66,8 @@ services:
     networks:
       - Technic-Test-Network
     depends_on:
-      - inventory-db
+      inventory-db:
+        condition: service_healthy
 
 networks:
   Technic-Test-Network:
